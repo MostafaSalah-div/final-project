@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in | MarketPRO</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body id="body">
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#" style="font-weight: bold;"><i class="fa-solid fa-shop"></i> Market<span class="logbrand">PRO</span></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </nav>
+
+    <div class="cont">
+    <form class="form" id="form" method="post">
+        
+        <div>
+        <label for="mail" >Email</label>
+        <br>
+        <input type="email" name="useremail" id="mail" required>
+        </div>
+        
+        <div>
+        <label for="pass">Password  </label>
+        <br>
+        <input type="password" name="userpassword" id="pass" required>
+        </div>
+        
+        <div>
+        <input type="submit" value="Login" class="btn  rounded-5" id="bts">
+        <input type="reset" value="reset" class="btn  rounded-5" id="btr">
+        </div>
+    
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="bootstrap.min.js"></script>    
+<script>
+  let form = document.getElementById("form");
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+});
+
+let arrUsers = [
+  { email: "mo@gmail.com", password: "12345678#" },
+  { email: "wo@gmail.com", password: "12340000!" }
+];
+
+let mail = document.getElementById("mail");
+let pass = document.getElementById("pass");
+
+mail.value=arrUsers[0].email;
+pass.value=arrUsers[0].password;
+
+document.getElementById("bts").addEventListener("click", function () {
+
+    if( mail.value.trim() ==="" || pass.value.trim()=== ""){
+        return;
+      }
+
+  let user = arrUsers.find(u => u.email === mail.value && u.password === pass.value);
+
+  if (user) {
+    window.location.href="home.html";
+  }
+
+else {
+  Swal.fire({
+    icon: "error",
+    title: "Error",
+    text: "Wrong at password or email",
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true
+  });
+  }
+
+});
+
+
+</script>
+</body>
+</html>

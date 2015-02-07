@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products  | MarketPRO</title>
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg" id="nav">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="home.html"><i class="fa-solid fa-shop"></i> Market<span class="logbrand">PRO</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link " href="home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="products.html">Products</a></li>
+          <li class="nav-item"><a class="nav-link " href="about.html">About</a></li>
+          <li class="nav-item">
+            <a class="btn btn-outline-dark" href="#cartSection">🛒 Cart (<span id="count">0</span>)</a>
+          </li>
+          <li class="nav-item"><button id="logout" class="btn btn-danger btn-sm ms-2 rounded-5">Logout</button></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Products -->
+  <div class="container my-5 pt-4">
+    <h3 class="mb-4">Products</h3>
+    <div class="row g-4" id="concard"></div>
+  </div>
+
+  <!-- Cart Section -->
+  <div class="container my-5 pt-4" id="cartSection">
+    <h3>Your Cart</h3>
+    <table class="table table-bordered table-striped mt-3">
+      <thead class="table-dark">
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Qty</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody id="cartTable"></tbody>
+    </table>
+    <h4 class="text-end">Grand Total: $<span id="grandTotal">0</span></h4>
+  </div>
+<!-- Add Product Section -->
+<div class="container my-5 pt-4" id="addProductSection">
+  <h3>Add Product</h3>
+  <form id="addProductForm" class="row g-3">
+    <div class="col-md-4">
+      <input type="text" id="productName" class="form-control" placeholder="Product Name" required>
+    </div>
+    <div class="col-md-4">
+      <input type="number" id="productPrice" class="form-control" placeholder="Price ($)" required>
+    </div>
+    <div class="col-md-4">
+      <input type="file" id="productImg" class="form-control" accept="image/*" required>
+    </div>
+    <div class="col-12 text-end">
+      <button type="submit" class="btn btn-primary">Add Product</button>
+    </div>
+  </form>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-light py-4 mt-5">
+  <div class="container text-center">
+    <p class="mb-1">
+      <i class="fa-solid fa-shop"></i> Market<span class="logbrand">PRO</span>
+    </p>
+    <p class="mb-2">Your trusted e-commerce platform</p>
+    <div class="mb-2">
+      <a href="home.html" class="text-light mx-2 text-decoration-none">Home</a> |
+      <a href="products.html" class="text-light mx-2 text-decoration-none">Products</a> |
+      <a href="about.html" class="text-light mx-2 text-decoration-none">About</a>
+    </div>
+    <div>
+      <a href="#" class="text-light mx-2" ><i class="fab fa-facebook ihover"></i></a>
+      <a href="#" class="text-light mx-2"><i class="fab fa-twitter ihover"></i></a>
+      <a href="#" class="text-light mx-2"><i class="fab fa-instagram ihover"></i></a>
+    </div>
+    <hr class="bg-light">
+    <p class="mb-0">&copy; 2025 MarketPRO. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+document.getElementById("logout").addEventListener("click", function(){
+  window.location.href="index.html";
+});
+
+let Products = [
+  {id: 1, img: "images/sale-with-special-discount-speaker.jpg", productName: "EarPhone", price: 40},
+  {id: 2, img: "images/discount-sofa-podium.jpg", productName: "Sofa", price: 70},
+  {id: 3, img: "images/discount-sneakers-podium.jpg", productName: "Shoes", price: 30},
+  {id: 4, img: "images/discount-armchair-podium.jpg", productName: "Chair", price: 50},
+  {id: 5, img: "images/sale-with-special-discount-vr-glasses.jpg", productName: "VR", price: 120},
+  {id: 6, img: "images/sale-with-special-discount-vr-glasses.jpg", productName: "VR Pro", price: 200},
+  {id: 7, img: "images/sale-with-special-discount-speaker.jpg", productName: "EarPhone Pro", price: 80},
+  {id: 8, img: "images/discount-sofa-podium.jpg", productName: "Sofa dubel", price: 140},
+  {id: 9, img: "images/discount-sneakers-podium.jpg", productName: "sport Shoes", price: 35},
+];
+
+let concard = document.getElementById("concard");
+let countSpan = document.getElementById("count");
+let cartTable = document.getElementById("cartTable");
+let grandTotalSpan = document.getElementById("grandTotal");
+
+let cart = [];
+
+
+function updateCart() {
+  let totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+  countSpan.innerText = totalQty;
+
+  cartTable.innerHTML = "";
+  let grandTotal = 0;
+
+  cart.forEach(item => {
+    let tr = document.createElement("tr");
+
+    let tdName = document.createElement("td");
+    tdName.innerText = item.productName;
+
+    let tdPrice = document.createElement("td");
+    tdPrice.innerText = item.price + "$";
+
+    let tdQty = document.createElement("td");
+    tdQty.innerText = item.qty;
+
+    let tdTotal = document.createElement("td");
+    tdTotal.innerText = (item.price * item.qty) + "$";
+
+    grandTotal += item.price * item.qty;
+
+    tr.appendChild(tdName);
+    tr.appendChild(tdPrice);
+    tr.appendChild(tdQty);
+    tr.appendChild(tdTotal);
+
+    cartTable.appendChild(tr);
+  });
+
+  grandTotalSpan.innerText = grandTotal;
+}
+
+
+function renderProduct(p) {
+  let col = document.createElement("div");
+  col.className = "col-md-4";
+
+  col.setAttribute("data-aos", "flip-left");
+  col.setAttribute("data-aos-delay", "200");
+  col.setAttribute("data-aos-duration", "1000");
+
+  let card = document.createElement("div");
+  card.className = "card shadow-sm h-100";
+
+  let img = document.createElement("img");
+  img.src = p.img;
+  img.className = "card-img-top";
+
+  let body = document.createElement("div");
+  body.className = "card-body";
+
+  let title = document.createElement("h5");
+  title.className = "card-title";
+  title.innerText = p.productName;
+
+  let price = document.createElement("p");
+  price.className = "card-text";
+  price.innerText = p.price + "$";
+
+  let addBtn = document.createElement("button");
+  addBtn.className = "btn btn-success btn-sm rounded-5 me-2";
+  addBtn.innerText = "Add";
+  addBtn.addEventListener("click", () => {
+    let item = cart.find(i => i.id === p.id);
+    if(item){
+      item.qty++;
+    } else {
+      cart.push({...p, qty: 1});
+    }
+    updateCart();
+  });
+
+  let removeBtn = document.createElement("button");
+removeBtn.className = "btn btn-danger btn-sm rounded-5";
+removeBtn.innerText = "Remove";
+removeBtn.addEventListener("click", () => {
+  let item = cart.find(i => i.id === p.id);
+
+  if(item){
+    Swal.fire({
+      title: "Are you sure?",
+      text: `Do you want to remove ${item.productName} from cart?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, remove it!",
+      cancelButtonText: "No, keep it"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if(item.qty > 1){
+          item.qty--;
+        } else {
+          cart = cart.filter(i => i.id !== p.id);
+        }
+        updateCart();
+
+        Swal.fire({
+          title: "Removed!",
+          text: `${item.productName} has been removed.`,
+          icon: "success",
+          timer: 1500,
+          showConfirmButton: false
+        });
+      }
+    });
+  }
+});
+
+  body.appendChild(title);
+  body.appendChild(price);
+  body.appendChild(addBtn);
+  body.appendChild(removeBtn);
+
+  card.appendChild(img);
+  card.appendChild(body);
+  col.appendChild(card);
+  concard.appendChild(col);
+
+}
+
+
+Products.forEach((p) => renderProduct(p));
+updateCart();
+
+
+document.getElementById("addProductForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  let name = document.getElementById("productName").value.trim();
+  let price = parseFloat(document.getElementById("productPrice").value);
+  let imgFile = document.getElementById("productImg").files[0];
+
+  if(name && price && imgFile){
+    let reader = new FileReader();
+
+    reader.onload = function(event){
+      let newProduct = {
+        id: Products.length + 1,
+        productName: name,
+        price: price,
+        img: event.target.result 
+      };
+
+      Products.push(newProduct);
+      renderProduct(newProduct); 
+    };
+
+    reader.readAsDataURL(imgFile); 
+    this.reset();
+  }
+});
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

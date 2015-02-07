@@ -1,0 +1,141 @@
+/* ========== Reset ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+
+
+  /* ========== Navbar ========== */
+  nav {
+    background-color: rgb(237, 212, 123);
+  
+  }
+  .logbrand {
+    font-weight: bold;
+    color: rgb(255, 119, 0);
+  }
+  #navbarNavDropdown {
+    justify-content: right;
+  }
+
+  #nav{
+    position: sticky;
+    top: 0px;
+    z-index: 1000;
+  }
+
+  ul a{
+color: rgb(0, 0, 0);
+font-size: 15px;
+font-weight: 4px;
+position: relative;
+  }
+
+  ul a::after{
+    content:"";
+    position: absolute;
+    background-color: aliceblue;
+    width:50px;
+    height: 4px;
+    border-radius: 5px;
+    left: 9px;
+    bottom: 0;
+    transform: scale(0);
+    transition: 0.5s;
+  }
+  ul a:hover::after {
+    transform: scale(1);
+  }
+  
+  /* ========== Login Page ========== */
+  .form {
+    display: grid;
+    grid-template-columns: auto;
+    justify-content: center;
+    row-gap: 30px;
+    max-width: 30%;
+    padding: 40px 0;
+    border-radius: 15px;
+    position: relative;
+    left: 35%;
+    top: 150px;
+    background: linear-gradient(45deg, #f48383, rgb(244, 209, 139));
+    box-shadow: 1px 1px 10px 1px rgb(103, 102, 102);
+    animation-name: opa;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    animation-fill-mode: both;
+  }
+  
+  @keyframes opa{
+0%{
+  transform: translateY(5px);
+  filter: opacity(0);
+}
+100%{
+  transform: translateY(-5px);
+  filter: opacity(1);
+}
+  }
+
+
+  .form input {
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    width: 90%;
+  }
+  
+  #bts {
+    background-color: rgb(71, 187, 200);
+    border: none;
+    margin-right: 5px;
+    color: aliceblue;
+    transition: 0.4s;
+  }
+  #bts:hover {
+    transform: translateY(-3px);
+    background-color: rgb(174, 250, 250);
+    color: black;
+  }
+  
+  #btr {
+    background-color: transparent;
+    border: 1px solid white;
+    color: aliceblue;
+    transition: 0.4s;
+    transform: translateY(10px);
+  }
+  #btr:hover {
+    transform: translateY(7px);
+    background-color: rgb(250, 250, 186);
+    color: black;
+  }
+  
+   
+  /* ========== Footer ========== */
+ .ihover{
+  color: aliceblue;
+  transition: 0.3s;
+  transform: scale(1);
+ }
+  
+ .ihover:hover{
+  color: orange;
+  transform: scale(1.3);
+ }
+  
+  
+  /* ========== Responsive ========== */
+  @media(max-width:986px) {
+    .form { max-width: 40%; left: 30%; }
+  }
+  @media(max-width:744px) {
+    .form { max-width: 60%; left: 20%; }
+  }
+  @media(max-width:378px) {
+    .form { max-width: 80%; left: 10%; }
+  }

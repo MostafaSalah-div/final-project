@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | MarketPRO</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+  <!-- Swiper CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg" id="nav">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="home.html" style="font-weight: bold;">
+        <i class="fa-solid fa-shop"></i>Market<span class="logbrand">PRO</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="Products.html">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item ">
+            <button id="logout" class=" btn btn-danger rounded-5">logout</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>    
+
+  <!-- Main Content -->
+  <section class="container mt-5 pt-5 text-center">
+    <h1>Welcome to Market <span class="logbrand">PRO</span> 🛍️</h1>
+      <!-- Swiper Section -->
+  <section class="container mt-5">
+    <h2 class="text-center mb-4">🔥 Latest Discounts</h2>
+
+    <!-- Swiper -->
+    <div class="swiper mySwiper rounded-5 shadow">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="images/405.jpg" class="img-fluid rounded shadow">
+        </div>
+        <div class="swiper-slide">
+          <img src="images/Trendy Website Homepage Accessories Sale Banner.png" class="img-fluid rounded shadow">
+        </div>
+        <div class="swiper-slide">
+          <img src="images/Crendy Website Homepage Accessories Sale Banner.png" class="img-fluid rounded shadow">
+        </div>
+      </div>
+      <!-- Pagination -->
+      <div class="swiper-pagination"></div>
+      <!-- Navigation -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </section>
+  <p class="lead">Your one-stop shop for amazing products at the best prices.</p>
+    <a href="products.html" class="btn btn-primary rounded-5">Shop Now</a>
+  </section>
+
+  <!-- Footer -->
+<footer class="bg-dark text-light py-4 mt-5">
+  <div class="container text-center">
+    <p class="mb-1">
+      <i class="fa-solid fa-shop"></i> Market<span class="logbrand">PRO</span>
+    </p>
+    <p class="mb-2">Your trusted e-commerce platform</p>
+    <div class="mb-2">
+      <a href="home.html" class="text-light mx-2 text-decoration-none">Home</a> |
+      <a href="products.html" class="text-light mx-2 text-decoration-none">Products</a> |
+      <a href="about.html" class="text-light mx-2 text-decoration-none">About</a>
+    </div>
+    <div>
+      <a href="#" class="text-light mx-2" ><i class="fab fa-facebook ihover"></i></a>
+      <a href="#" class="text-light mx-2"><i class="fab fa-twitter ihover"></i></a>
+      <a href="#" class="text-light mx-2"><i class="fab fa-instagram ihover"></i></a>
+    </div>
+    <hr class="bg-light">
+    <p class="mb-0">&copy; 2025 MarketPRO. All Rights Reserved.</p>
+  </div>
+</footer>
+
+
+  <script>
+    document.getElementById("logout").addEventListener("click",function(){
+      window.location.href="index.html";
+    });
+  </script>
+
+  <script src="bootstrap.min.js"></script>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      loop: true,
+      autoplay: { delay: 2500, disableOnInteraction: false },
+      pagination: { el: ".swiper-pagination", clickable: true },
+      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+    });
+  </script>
+</body>
+</html>
