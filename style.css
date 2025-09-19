@@ -137,5 +137,5 @@ position: relative;
     .form { max-width: 60%; left: 20%; }
   }
   @media(max-width:378px) {
-    .form { max-width: 80%; left: 10%; }
+    .form { max-width: 90%; left: 10%; }
   }
